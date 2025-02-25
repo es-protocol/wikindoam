@@ -16,8 +16,8 @@ Styled using various CSS rules (no frameworks used)
 
 Fully responsive with at least 2 breakpoints
 
-##Folder Structure
-frontend/
+## Folder Structure
+```frontend/
 ├── css/
 │   ├── styles.css
 ├── images/
@@ -28,7 +28,7 @@ frontend/
 ├── products.html
 ├── contact.html
 ├── faq.html
-├── landingpage.html
+├── landingpage.html```
 
 How to View the Project
 
