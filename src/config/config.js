@@ -1,4 +1,6 @@
-require("dotenv").config();
+// configuration file for managing environment variables
+
+require("dotenv").config();// Load environment variables from .env file
 
 module.exports = {
     DB_USER: process.env.DB_USER,

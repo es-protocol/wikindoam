@@ -4,23 +4,23 @@ require("dotenv").config(); // Load environment variables
 
 // Create a new pool with database connection settings
 const pool = new Pool({
-    user: config.DB_USER,      // PostgreSQL username
-    host: config.DB_HOST,      // Host (localhost or remote)
-    database: config.DB_NAME,  // Database name
-    password: config.DB_PASS,  // Database password
-    port: config.DB_PORT || 5432 // Default PostgreSQL port
+    user: config.DB_USER,
+    host: config.DB_HOST,
+    database: config.DB_NAME,
+    password: config.DB_PASS,
+    port: config.DB_PORT || 5432
 });
 
-//in the catch block, i need to code it in such a way that it retries 2 - 3 time before exiting
+//(note to self(NTS)) In the catch block, i need to code it in such a way that it retries 2 - 3 time before exiting
 
-
+// Function to establish a database connection with retries
 const connectDB = async (retries = 5, delay = 3000) => {
     for (let i = 0; i < retries; i++){
         try {
             const client = await pool.connect();
             console.log("PostgreSQL connected Successfully");
-            client.release(); // Release the client back to the pool
-            return; //exit function on success
+            client.release();
+            return;
         } catch (err) {
             console.error(`Database connection attempt ${i + 1} of ${retries} failed. Retrying in ${delay / 1000} seconds...`, err);
             if (i < retries - 1) {

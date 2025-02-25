@@ -4,18 +4,22 @@ const express = require("express");
 const cors = require("cors");
 
 
-const app = express();
-
+const app = express(); //Initial express application
 const userRouter = require("./src/routes/users");
 
-//serve static files
+//Serve static files
 app.use(express.static(path.join(__dirname, "frontend")));
 
-app.use(cors());
-app.use(express.json());
-app.use("/users", userRouter); // Corrected the route
+//Middleware setup
+app.use(cors());//enable cors for cross origin request
+app.use(express.json());//parse or review incoming json requests
 
+//Mount user routes
+app.use("/users", userRouter); 
+
+//Default route
 app.get("/", (req, res) => {
+    //For testing purposes. Will serve inde.html once its built and completed
     res.send("Welcome To E-Commerce API!");
 });
 
@@ -27,7 +31,7 @@ app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
 
-// Catch-all route for any undefined routes
+// Catch-all 404 errors for any undefined routes
 app.use((req, res, next) => {
     res.status(404).json({ error: "Route not found" });
 });
