@@ -16,7 +16,7 @@ Styled using various CSS rules (no frameworks used)
 
 Fully responsive with at least 2 breakpoints
 
-Folder Structure
+##Folder Structure
 frontend/
 ├── css/
 │   ├── styles.css
