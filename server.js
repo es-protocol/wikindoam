@@ -3,9 +3,11 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
-
 const app = express(); //Initial express application
 const userRouter = require("./src/routes/users");
+const homeRoutes = require("./src/routes/homeroutes");
+const productsRoutes = require("./src/routes/productRoutes"); //ask Ava in class, i renamed this file to productRoutes
+                                                            //Why is the lower case form working but not the upper case?
 
 //Serve static files
 app.use(express.static(path.join(__dirname, "frontend")));
@@ -14,14 +16,10 @@ app.use(express.static(path.join(__dirname, "frontend")));
 app.use(cors());//enable cors for cross origin request
 app.use(express.json());//parse or review incoming json requests
 
-//Mount user routes
-app.use("/users", userRouter); 
-
-//Default route
-app.get("/", (req, res) => {
-    //For testing purposes. Will serve inde.html once its built and completed
-    res.send("Welcome To E-Commerce API!");
-});
+//Mount user, home & product routes
+app.use("/users", userRouter);
+app.use('/', homeRoutes);
+app.use("/", productsRoutes);
 
 // Define the port
 const PORT = process.env.PORT || 5000;

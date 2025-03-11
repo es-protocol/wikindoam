@@ -1,0 +1,25 @@
+const express = require("express");
+const path = require("path");
+const router = express.Router();
+
+//Default route
+router.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "..", "frontend", "index.html"));
+});
+
+//Signup/Signin route
+router.get("/signup", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "..", "frontend", "landingpage.html"));
+});
+
+//Signin route
+router.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "..", "frontend", "login.html"));
+});
+
+//FAQ route
+router.get("/faq", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "..", "frontend", "faq.html"));
+});
+
+module.exports = router;

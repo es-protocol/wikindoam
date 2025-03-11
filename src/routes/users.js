@@ -4,7 +4,7 @@ const { createUserController, loginUserController, signupUserController } = requ
 
 const router = express.Router();//Initialize the express router
 
-// Admin created signup route
+// Admin created user signup route
 router.post("/adminsignup", createUserController);
 
 //user signup route
