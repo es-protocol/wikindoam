@@ -1,8 +1,9 @@
 /* Product List Styling (Grid Layout) */
+/* Product List Styling (Grid Layout) */
 .product-list {
-    display: grid; /* Use grid layout */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ensure grid items take up equal space */
-    gap: 20px; /* Space between the products */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
     padding: 20px;
     margin-top: 20px;
 }
@@ -12,17 +13,20 @@
     background: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08); /* I slightly softened the shadow for a more modern look */
     text-align: center;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.2s ease-in-out;
     display: flex;
-    flex-direction: column; /* Stack elements vertically within the card */
+    flex-direction: column;
+    align-items: center; /* I added this to ensure items stay centered */
 }
 
+/* I made the hover animation a little more gentle */
 .product-card:hover {
-    transform: scale(1.05); /* Slight zoom effect when hovered */
+    transform: translateY(-5px); /* Slight lift effect */
 }
 
+/* Image inside product card */
 .product-image img {
     width: 100%;
     height: 250px;
@@ -30,34 +34,38 @@
     border-radius: 8px;
 }
 
+/* Product text info */
 .product-name {
-    font-size: 20px;
-    margin: 15px 0 10px;
-    color: #333;
+    font-size: 18px;
+    margin: 15px 0 8px;
+    font-weight: bold;
+    color: #222;
 }
 
 .product-description {
-    font-size: 14px;
+    font-size: 13px;
     color: #666;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .product-price {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #28a745;
+    margin-bottom: 10px;
 }
 
 .cta-btn {
     background-color: #28a745;
     color: white;
-    padding: 10px 20px;
+    padding: 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
     width: 100%;
+    text-decoration: none;
 }
 
 .cta-btn:hover {
@@ -72,10 +80,10 @@
 }
 
 #quantity1 {
-    width: 60px;               /* Slightly wider input box */
+    width: 60px;
     height: 40px;
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin: 0 10px;
@@ -95,6 +103,7 @@ footer .contact-options {
     display: flex;
     justify-content: center;
     gap: 20px;
+    flex-wrap: wrap; /* I added this so buttons don’t overflow on mobile */
 }
 
 .contact-button {
@@ -103,7 +112,7 @@ footer .contact-options {
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .contact-button:hover {

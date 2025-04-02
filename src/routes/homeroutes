@@ -9,8 +9,10 @@ router.get("/", (req, res) => {
 
 //Signup/Signin route
 router.get("/signup", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "..", "frontend", "landingpage.html"));
+    res.sendFile(path.join(__dirname, "..", "..", "frontend", "landingpage.html")); // look up on the difference between res.sendFile and res.send
 });
+
+//Personal Note: check out canisue.com
 
 //Signin route
 router.get("/login", (req, res) => {

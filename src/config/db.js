@@ -14,7 +14,7 @@ const pool = new Pool({
 //(note to self(NTS)) In the catch block, i need to code it in such a way that it retries 2 - 3 time before exiting
 
 // Function to establish a database connection with retries
-const connectDB = async (retries = 5, delay = 3000) => {
+const connectDB = async (retries = 3, delay = 3000) => {
     for (let i = 0; i < retries; i++){
         try {
             const client = await pool.connect();

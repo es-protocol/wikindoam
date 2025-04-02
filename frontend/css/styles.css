@@ -1,19 +1,7 @@
-/*temporary back button style*/
-.back-button {
-    display: inline-block;
-    margin: 20px;
-    padding: 10px 15px;
-    background: #28a745;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
-}
-.back-button:hover {
-    background: #218838;
-}
-/*Global Styles*/
-*{
+/* ===================== */
+/* ✅ GLOBAL STYLES */
+/* ===================== */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -25,20 +13,22 @@ body {
     color: #333;
     line-height: 1.6;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: auto;
     min-height: 100vh;
     overflow-y: auto;
 }
 
+/* ===================== */
+/* ✅ FORM & CONTAINER STYLES */
+/* ===================== */
 .container {
     width: 100%;
     max-width: 500px;
     background: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
 }
@@ -48,26 +38,23 @@ h2 {
     margin-bottom: 20px;
 }
 
-/*Signup Form Styles*/
+/* Signup Form Styles */
 form {
     display: flex;
     flex-direction: column;
 }
 
-label{
+label {
     font-weight: bold;
     margin-top: 10px;
 }
 
-input{
+input, select {
     padding: 10px;
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
-}
-
-input, select {
     margin-bottom: 10px;
 }
 
@@ -82,75 +69,175 @@ button {
     font-size: 16px;
 }
 
-select {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    color: #333;
-    font-family: inherit;
-}
-
 button:hover {
     background-color: #218838;
 }
 
-/*Responsive design*/
+/* ===================== */
+/* ✅ PRODUCT PAGE STYLES */
+/* ===================== */
+
+/* 🟢 HEADER (Page Title) */
+header {
+    width: 90%;
+    max-width: 700px;
+    text-align: center;
+    padding: 15px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+}
+
+header h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #222;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* 🟢 PRODUCT CONTAINER */
+.product-container {
+    width: 90%;
+    max-width: 700px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* 🟢 PRODUCT IMAGE */
+#product-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#product-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 🟢 PRODUCT DETAILS */
+#product-details {
+    text-align: center;
+    width: 100%;
+}
+
+#product-name {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+#product-description {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+#product-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #28a745;
+    margin-bottom: 5px;
+}
+
+#product-stock, #product-store-id {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 🟢 ACTION BUTTONS */
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 15px;
+}
+
+.buy-btn, .back-button {
+    flex: 1;
+    padding: 12px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    text-decoration: none;
+}
+
+.buy-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+}
+
+.buy-btn:hover {
+    background: #218838;
+}
+
+.back-button {
+    background: #ccc;
+    color: black;
+    border: none;
+}
+
+.back-button:hover {
+    background: #bbb;
+}
+
+/* ===================== */
+/*  FOOTER (Fixed) */
+/* ===================== */
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    margin-top: auto;
+}
+
+/* ===================== */
+/*  RESPONSIVE DESIGN */
+/* ===================== */
 @media (max-width: 600px) {
-    .container{
-        width: 90%;
+    .product-container {
+        width: 95%;
+        padding: 20px;
     }
 
-    header h2 {
+    #product-name {
         font-size: 20px;
-        text-align: center;
+    }
+
+    #product-description {
+        font-size: 14px;
+    }
+
+    .buy-btn, .back-button {
+        font-size: 14px;
         padding: 10px;
     }
 }
 
+/* ===================== */
+/*  PRODUCT LISTING PAGE */
+/* ===================== */
 
-
-/*Product page Styles*/
-/* Header Styles */
-header {
-    width: 100%;
-    display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
-    padding: 20px 0;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-/* Header Title */
-header h2 {
-    font-size: 28px;
-    color: #222;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-    margin: 0;
-    text-align: center; /* Ensures text is centered */
-    width: 100%; /* Makes sure it spans full width */
-}
-
-
-.product_list {
-    display: grid;
-    grid-template-columns: repeat((auto-fit), minmax(250px, 1fr));
-    gap: 20px;
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-
-}
-
-/*Product Card*/
+/*  PRODUCT CARD */
 .product {
     background: white;
     padding: 15px;
@@ -187,90 +274,9 @@ header h2 {
     margin-bottom: 10px;
 }
 
-.product button {
-    padding: 8px 15px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.product button:hover {
-    background-color: #218838;
-}
-
-.faq {
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 5px;
-    background: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.faq h3 {
-    margin-bottom: 10px;
-    color: #222;
-}
-
-.faq p {
-    color: #555;
-}
-
-.faq a {
-    color: #28a745;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.faq a:hover {
-    text-decoration: underline;
-}
-
-/* Make FAQ section responsive */
-@media (max-width: 600px) {
-    .faq {
-        padding: 10px;
-    }
-}
-
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .product_list {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-}
-
-@media (max-width: 480px) {
-    .product_list {
-        grid-template-columns: 1fr;
-    }
-}
-
-
-/*Styles for landingPage.html*/
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
-    padding: 50px;
-}
-.container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-h1 {
-    color: #333;
-}
-.links {
-    margin-top: 20px;
-}
+/* ===================== */
+/*  LANDING PAGE */
+/* ===================== */
 .links a {
     display: block;
     margin: 10px 0;
@@ -280,48 +286,7 @@ h1 {
     text-decoration: none;
     border-radius: 4px;
 }
+
 .links a:hover {
     background: #218838;
-}
-
-
-
-/* Footer with Contact Information */
-footer {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    margin-top: 40px;
-}
-
-footer .co
-
-
-/* Footer with Contact Information */
-footer {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    margin-top: 40px;
-}
-
-footer .contact-options {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.contact-button {
-    background-color: #28a745;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-.contact-button:hover {
-    background-color: #218838;
 }
