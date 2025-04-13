@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "frontend")));
 app.use(cors());//enable cors for cross origin request
 app.use(express.json());//parse or review incoming json requests
 app.use(limiter);
-app.use(helmet());//help protect against common http vulnerabilities 
+app.use(helmet());//help protect against common http vulnerabilities
 //clickjacking(x-frame-option), blocksniffing(x-content-type) etc
 
 app.use(helmet.contentSecurityPolicy({
@@ -40,6 +40,9 @@ app.use(helmet.contentSecurityPolicy({
     })
 );
 
+app.get('/api/test-route', (req, res) => {
+    res.json({ working: true });
+});
 
 //Mount user, home & product routes
 app.use("/users", userRouter);

@@ -3,15 +3,24 @@ const config = require("./config")
 require("dotenv").config(); // Load environment variables
 
 // Create a new pool with database connection settings
-const pool = new Pool({
+const poolConfig = process.env.DATABASE_URL
+? {// Production Configuration For Render
+    connectionString: process.env.DATABASE_URL,
+    ssl: {rejectUnauthorized: false}
+}
+: {// Local dev config
+
     user: config.DB_USER,
     host: config.DB_HOST,
     database: config.DB_NAME,
     password: config.DB_PASS,
-    port: config.DB_PORT || 5432
-});
+    port: config.DB_PORT || 5432,
+    ssl: false
+};
 
-//(note to self(NTS)) In the catch block, i need to code it in such a way that it retries 2 - 3 time before exiting
+
+const pool = new Pool(poolConfig);
+
 
 // Function to establish a database connection with retries
 const connectDB = async (retries = 3, delay = 3000) => {

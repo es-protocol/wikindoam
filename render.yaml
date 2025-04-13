@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: wikindoam
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        value: 10000
+        fromDatabase:
+          name: wikindoam
+          property: connectionString
