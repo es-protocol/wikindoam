@@ -17,6 +17,8 @@ const limiter = rateLimit({
     message: "Too man requests from this IP, please try again after 15 minutes"
 });
 
+
+
 //Serve static files
 app.use(express.static(path.join(__dirname, "frontend")));
 

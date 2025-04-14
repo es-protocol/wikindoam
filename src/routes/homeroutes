@@ -4,7 +4,7 @@ const router = express.Router();
 
 //Default route
 router.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "..", "frontend", "index.html"));
+    res.sendFile(path.join(__dirname, "..", "..", "frontend", "landingpage.html"));
 });
 
 //Signup/Signin route
