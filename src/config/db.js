@@ -4,12 +4,13 @@ require("dotenv").config(); // Load environment variables
 
 // Create a new pool with database connection settings
 const poolConfig = process.env.DATABASE_URL
-? {// Production Configuration For Render
-    connectionString: process.env.DATABASE_URL,
-    ssl: {require: true, rejectUnauthorized: false}
+? {
+    connectionString: process.env.DATABASE_URL.includes('?')
+        ? process.env.DATABASE_URL + '&sslmode=require'
+        : process.env.DATABASE_URL + '?sslmode=require',
+    ssl: { rejectUnauthorized: false }
 }
-: {// Local dev config
-
+: {
     user: config.DB_USER,
     host: config.DB_HOST,
     database: config.DB_NAME,
@@ -17,7 +18,6 @@ const poolConfig = process.env.DATABASE_URL
     port: config.DB_PORT || 5432,
     ssl: false
 };
-
 
 const pool = new Pool(poolConfig);
 
