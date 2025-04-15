@@ -1,8 +1,3 @@
-// Set PGSSLMODE to require if a DATABASE_URL is provided
-if (process.env.DATABASE_URL) {
-    process.env.PGSSLMODE = 'require';
-}; 
-
 const { Pool } = require("pg"); //imports pool class from node.js postgresSQL package
 const config = require("./config")
 require("dotenv").config(); // Load environment variables
@@ -10,10 +5,8 @@ require("dotenv").config(); // Load environment variables
 // Create a new pool with database connection settings
 const poolConfig = process.env.DATABASE_URL
 ? {
-    connectionString: process.env.DATABASE_URL.includes('?')
-        ? process.env.DATABASE_URL + '&sslmode=require'
-        : process.env.DATABASE_URL + '?sslmode=require',
-    ssl: { require: true, rejectUnauthorized: false }
+    connectionString: process.env.DATABASE_URL, // Use the internal URL as is
+    ssl: false
 }
 : {
     user: config.DB_USER,
@@ -23,6 +16,7 @@ const poolConfig = process.env.DATABASE_URL
     port: config.DB_PORT || 5432,
     ssl: false
 };
+
 
 const pool = new Pool(poolConfig);
 
