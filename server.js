@@ -49,7 +49,7 @@ app.get('/api/test-route', (req, res) => {
 //Mount user, home & product routes
 app.use("/users", userRouter);
 app.use('/', homeRoutes);
-app.use("/", productsRoutes);
+app.use("/api/products", productsRoutes);
 
 // Define the port
 const PORT = process.env.PORT || 5000;

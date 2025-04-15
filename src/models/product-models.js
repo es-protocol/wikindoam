@@ -98,7 +98,7 @@ exports.deleteProduct = async (productId) => {
     const query = 'DELETE FROM products WHERE id = $1 RETURNING *';
     const result = await pool.query(query, [productId]);
 
-    //if product is non-exeistant return null
+    //if product is non-existent return null
     if (result.rows.length === 0) {
         return null;
     }
