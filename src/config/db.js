@@ -6,7 +6,7 @@ require("dotenv").config(); // Load environment variables
 const poolConfig = process.env.DATABASE_URL
 ? {// Production Configuration For Render
     connectionString: process.env.DATABASE_URL,
-    ssl: {rejectUnauthorized: false}
+    ssl: {require: true, rejectUnauthorized: false}
 }
 : {// Local dev config
 
