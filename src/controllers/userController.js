@@ -18,7 +18,6 @@ exports.createUserController = async (req, res) => {
             req.body.surname,
             req.body.email,
             req.body.password,
-            req.body.phone,
             req.body.date_of_birth,
             role, // Pass role explicitly
             req.body.street_address_1,
@@ -69,7 +68,7 @@ exports.loginUserController = async (req, res) => {
         }
 
         //Compare provided password with hashed password in the database
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, user.password_hash);
         if (!isMatch) {
             return res.status(401).json({ error: "Invalid Email or Password" });
         }
@@ -95,31 +94,55 @@ exports.loginUserController = async (req, res) => {
  * This function directly interacts with the database using SQL queries.
  */
 exports.signupUserController = async (req, res) => {
-    const { first_name, email, password, middle_name, surname, date_of_birth } = req.body;
+    const {
+        first_name, middle_name, surname,
+        email, password, date_of_birth
+    } = req.body;
 
-    console.log("Signup Attempt:", req.body);
-
-    //Validate required field
-    if (!first_name || !email || !password) {
-        return res.status(400).json({ error: "All fields are required" });
+    // Validate required fields
+    if (!first_name || !surname || !email || !password) {
+        return res.status(400).json({ error: "First name, surname, email & password are required" });
     }
 
-    try {
-        //Hash password before storing it in the database
-        const hashedPassword = await bcrypt.hash(password, 10);
+    // Build full_name
+    const full_name = [first_name, middle_name, surname].filter(Boolean).join(" ");
+    const user_role = "customer";   // or pull from req.body.role
+    const phone = null;             // since you defer it to checkout
 
-        //Insert new user into the database
+    try {
+        const password_hash = await bcrypt.hash(password, 10);
+
         const result = await pool.query(
-            `INSERT INTO users (first_name, email, password, created_at, middle_name, surname, date_of_birth)
-            VALUES ($1, $2, $3, NOW(), $4, $5, $6) RETURNING *`,
-            [first_name, email, hashedPassword, middle_name, surname, date_of_birth]
+            `INSERT INTO users
+                (first_name, middle_name, surname, full_name,
+                email, phone, password_hash, user_role,
+                date_of_birth, created_at, updated_at)
+            VALUES
+                ($1,$2,$3,$4, $5,$6,$7,$8, $9, NOW(), NOW())
+            RETURNING *`,
+            [
+                first_name,
+                middle_name,
+                surname,
+                full_name,
+                email,
+                phone,
+                password_hash,
+                user_role,
+                date_of_birth
+            ]
         );
 
-        //Send success response
-        res.status(201).json({ message: "User registered successfully", user: result.rows[0] });
-
+        return res.status(201).json({
+            message: "User registered successfully",
+            user: result.rows[0]
+        });
     } catch (err) {
         console.error("Database Error", err);
-        res.status(500).json({ error: "server error" });
+
+        if (err.code === "23505") {
+            return res.status(400).json({ error: "Email already exists" });
+        }
+        return res.status(500).json({ error: "Server error" });
     }
 };

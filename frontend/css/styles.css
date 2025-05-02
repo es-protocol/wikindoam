@@ -1,5 +1,15 @@
+
+/* Override for simple back‐link placement inside the login container */
+.container > .back-button {
+    display: inline-block;      /* don’t flex */
+    width: auto;
+    margin: 20px auto 0;
+    padding: 10px;
+    text-align: center;
+}
+
 /* ===================== */
-/* ✅ GLOBAL STYLES */
+/* GLOBAL STYLES */
 /* ===================== */
 * {
     margin: 0;
@@ -290,3 +300,21 @@ footer {
 .links a:hover {
     background: #218838;
 }
+
+/* Allow the featured‐products grid to stretch and center on larger screens */
+.featured-products {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+/* Allow the main content and grid to stretch */
+main {
+    /* override the body’s centering */
+    align-self: stretch;
+    /* give it some breathing room */
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+

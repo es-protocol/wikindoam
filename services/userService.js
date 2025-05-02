@@ -27,11 +27,12 @@ const createUser = async (
     first_name,
     middle_name,
     surname,
+    full_name,
     email,
-    password,
     phone,
     date_of_birth,
-    role = "user", // Default role should be "user"
+    password_hash,
+    user_role = "user", // Default role should be "user"
     street_address_1,
     street_address_2,
     city,
@@ -50,9 +51,9 @@ const createUser = async (
         const userResult = await client.query(
             `INSERT INTO users (
                 first_name, middle_name, surname, email, phone, date_of_birth, password, role, created_at
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW())
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9 NOW(), NOW())
             RETURNING id, first_name, middle_name, surname, email, phone, date_of_birth, role`,
-            [first_name, middle_name, surname, email, phone, date_of_birth, hashedPassword, role]
+            [first_name, middle_name, surname, full_name, email, phone, date_of_birth, hashedPassword, user_role]
         );
 
         const userId = userResult.rows[0].id;// Extract new user ID
@@ -80,18 +81,33 @@ const createUser = async (
 };
 
 
-/// Function to find user by email
+// Function to find user by email
 const findUserByEmail = async (email) => {
     try {
-        const result = await pool.query( 
-            "SELECT * FROM users WHERE email = $1", 
-            [email]
-        );
-        return result.rows[0];// Returns user object or undefined if not found
+        const result = await pool.query(
+        `
+        SELECT
+            id,
+            first_name,
+            middle_name,
+            surname,
+            full_name,
+            email,
+            phone,
+            date_of_birth,
+            password_hash,
+            user_role
+        FROM users
+        WHERE email = $1
+        `,
+        [email]
+    );
+      return result.rows[0]; // Returns user object, including password_hash and user_role
     } catch (err) {
         console.error("Error fetching user by email:", err);
         throw err;
     }
 };
+
 
 module.exports = { createUser, findUserByEmail }; 

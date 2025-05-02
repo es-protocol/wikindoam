@@ -43,7 +43,7 @@ exports.getProductByID = async (req, res) => {
 exports.updateProduct = async (req, res) => {
     try {
         const productId = req.params.id;
-        const productData = req.bod;
+        const productData = req.body;
         const updatedProduct = await productModel.updateProduct(productId, productData);
         if(!updatedProduct) {
             return res.status(404).json({ error: "Product not found for update"});
@@ -59,7 +59,7 @@ exports.updateProduct = async (req, res) => {
 exports.deleteProduct = async (req, res) => {
     try {
         const productId = req.params.id;
-        const deletedProduct = await product;productModel.deleteProduct(productId);
+        const deletedProduct = await productModel.deleteProduct(productId);
         if(!deletedProduct) {
             return res.status(404).json({ error: "Product not found for deletion"});
         }

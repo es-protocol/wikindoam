@@ -1,6 +1,6 @@
 /**
- * Admin Detection System 
- * 
+ * Admin Detection System
+ *
  * This code runs when the page loads and:
  * 1. checks if a jwt token exist in local storage
  * 2. If found verifies with backend if user is admin

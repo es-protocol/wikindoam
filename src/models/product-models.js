@@ -12,7 +12,7 @@ exports.createProduct = async (productData) => {
         stock_quantity,
         store_id,
         created_at,
-        image
+        image_url
     )
     VALUES ($1, $2, $3, $4, $5, $6, NOW(), $7)
     RETURNING *`;
@@ -66,8 +66,8 @@ exports.updateProduct = async (productId, productData) => {
         price = $3,
         stock_quantity = $4,
         store_id = $5,
-        created_at = NOW(),
-        image = $6
+        updated_at = NOW(),
+        image_url = $6
     WHERE id = $7
     RETURNING *`;
 
@@ -106,7 +106,8 @@ exports.deleteProduct = async (productId) => {
     return result.rows[0];
 };
 
-//SEARCH - search products by name or description
+//SEARCH - search products by name or description 
+//Ive not really tested this that is why I will probably omit it from the submission
 exports.searchProducts = async (searchTerm) => {
     const query = `
     SELECT * FROM products

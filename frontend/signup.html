@@ -29,9 +29,6 @@
             <label for="confirmPassword">Confirm Password</label>
             <input type="password" id="confirmPassword" name="confirmPassword" required>
 
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" required>
-
             <label for="dateOfBirth">Date of Birth</label>
             <input type="date" id="dateOfBirth" name="dateOfBirth" required>
 
@@ -50,7 +47,6 @@
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
             const confirmPassword = document.getElementById("confirmPassword").value;
-            const phone = document.getElementById("phone").value;
             const dateOfBirth = document.getElementById("dateOfBirth").value;
 
             // Check if passwords match
@@ -66,7 +62,7 @@
                 surname: surname,
                 email: email,
                 password: password,
-                phone: phone,
+                //phone: phone,
                 date_of_birth: dateOfBirth
             };
 

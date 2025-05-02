@@ -8,6 +8,7 @@ app.disable('x-powered-by');
 const userRouter = require("./src/routes/users");
 const homeRoutes = require("./src/routes/homeroutes");
 const productsRoutes = require("./src/routes/productRoutes");
+const orderRoutes = require('./src/routes/orderRoutes');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 
@@ -46,10 +47,11 @@ app.get('/api/test-route', (req, res) => {
     res.json({ working: true });
 });
 
-//Mount user, home & product routes
+//Mount user, home, order & product routes
 app.use("/users", userRouter);
 app.use('/', homeRoutes);
 app.use("/api/products", productsRoutes);
+app.use('/api/orders', orderRoutes);
 
 // Define the port
 const PORT = process.env.PORT || 5000;

@@ -3,14 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Author" content="Thomas Tamba Smart">
+    <link rel="stylesheet" href="css/styles.css">
     <title>Login</title>
 </head>
 <body>
-    <h2>Login Page</h2>
-    <p>This is a placeholder for the login page.</p>
-
-    <a href="landingpage.html" class="back-button">← Back to Home</a>
+    <div class="container">
+        <h2>Login to Your Account</h2>
+        <!-- Inline error message container -->
+        <div id="errorMessage" style="color: red; margin-bottom: 10px;"></div>
+        <form id="loginForm">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
     
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+    
+            <button type="submit" id="loginButton">Log In</button>
+        </form>
+        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+        <a href="landingpage.html" class="back-button">← Back to Home</a>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+        const loginButton = document.getElementById('loginButton');
+        const errorDiv = document.getElementById('errorMessage');
+
+        // Disable button to prevent double submits
+        loginButton.disabled = true;
+        loginButton.textContent = 'Logging in...';
+        errorDiv.textContent = '';
+    
+          // Get form values
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+    
+        try {
+            const response = await fetch('http://localhost:5000/users/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+    
+            const result = await response.json();
+    
+            if (response.ok) {
+                alert('Login successful!');
+                // store JWT in localStorage
+                localStorage.setItem('token', result.token);
+                // Redirect to main page or dashboard
+                window.location.href = 'index.html';
+            } else {
+                //Show inline error message
+                errorDiv.textContent = result.error || 'Login failed. Please try again.';
+            }
+        } catch (err) {
+            console.error('Login Error', err);
+            alert('An error occurred. Please try again later.');
+        } finally {
+            // Re-enable the button
+            loginButton.disabled = false;
+            loginButton.textContent = 'Log In';
+        }
+        });
+    </script>
 </body>
 </html>
 
